@@ -2,8 +2,8 @@ package bleier.dictionary;
 
 public class DictionaryResponse {
 
-    String word;
-    String definition;
+    private String word;
+    private String definition;
 
     public DictionaryResponse(String word, String definition) {
         this.word = word;

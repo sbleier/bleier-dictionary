@@ -2,7 +2,7 @@ package bleier.dictionary;
 
 public class DictionaryRequest {
 
-    String word;
+    private String word;
 
     public DictionaryRequest(String word) {
         this.word = word;

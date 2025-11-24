@@ -10,15 +10,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TouroDictionaryServiceTest {
 
     @Test
-    public void lookup() throws IOException {
+    public void lookup() {
         //given
         TouroDictionaryServiceFactory factory = new TouroDictionaryServiceFactory();
         TouroDictionaryService service = factory.create();
 
         //when
         DictionaryRequest request = new DictionaryRequest("DAYSTAR");
-        Response<DictionaryResponse> response = service.lookup(request).execute();
-        DictionaryResponse body = response.body();
+        DictionaryResponse body = service.lookup(request).blockingGet();
 
         //then
         assertEquals("DAYSTAR", body.getWord());

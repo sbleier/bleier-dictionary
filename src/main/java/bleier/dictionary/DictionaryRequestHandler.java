@@ -9,17 +9,22 @@ import java.io.IOException;
 
 public class DictionaryRequestHandler implements RequestHandler<APIGatewayProxyRequestEvent, DictionaryResponse> {
 
-    @Override
-    public DictionaryResponse handleRequest(APIGatewayProxyRequestEvent event, Context context) {
-        String body = event.getBody();
-        Gson gson = new Gson();
-        DictionaryRequest request = gson.fromJson(body, DictionaryRequest.class);
-        TouroDictionary dictionary = null;
+    private TouroDictionary dictionary;
+
+    public DictionaryRequestHandler() {
+        dictionary = null;
         try {
             dictionary = new TouroDictionary();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public DictionaryResponse handleRequest(APIGatewayProxyRequestEvent event, Context context) {
+        String body = event.getBody();
+        Gson gson = new Gson();
+        DictionaryRequest request = gson.fromJson(body, DictionaryRequest.class);
         return new DictionaryResponse(request.getWord(), dictionary.lookup(request.getWord()));
     }
 
