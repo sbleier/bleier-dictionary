@@ -12,10 +12,12 @@ public class TouroDictionary {
 
     public TouroDictionary() throws IOException {
             InputStream in = getClass().getClassLoader().getResourceAsStream("dictionary.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));            String currentLine = br.readLine();
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String currentLine = br.readLine();
             while (currentLine != null) {
                 if (currentLine.contains(" ")) {
-                    dictionary.put(currentLine.substring(0, currentLine.indexOf(" ")), currentLine.substring(currentLine.indexOf(" ") + 1));
+                    dictionary.put(currentLine.substring(0, currentLine.indexOf(" ")),
+                            currentLine.substring(currentLine.indexOf(" ") + 1));
                 } else {
                     dictionary.put(currentLine, "");
                 }
@@ -23,7 +25,7 @@ public class TouroDictionary {
             }
     }
 
-    public String lookup (String word) {
+    public String lookup(String word) {
         return dictionary.get(word.toUpperCase());
     }
 
