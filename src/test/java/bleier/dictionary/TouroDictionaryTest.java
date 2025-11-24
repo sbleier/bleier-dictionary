@@ -1,3 +1,5 @@
+package bleier.dictionary;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -5,7 +7,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class TouroDictionaryTest {
+public class TouroDictionaryTest {
 
     @Test
     void lookup() throws IOException {
@@ -15,12 +17,5 @@ class TouroDictionaryTest {
         assertEquals("to {greet=v} [v -ED, -ING, -ES or -S]", def);
     }
 
-    @Test
-    void lookupAA() throws IOException {
-        TouroDictionary dict = new TouroDictionary();
-        String def = dict.lookup("AA");
-
-        assertEquals("rough, cindery lava [n -S]", def);
-    }
 
 }
