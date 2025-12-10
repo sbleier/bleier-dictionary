@@ -10,7 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-public class DictionaryRequestHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class DictionaryRequestHandler implements RequestHandler<APIGatewayProxyRequestEvent,
+        APIGatewayProxyResponseEvent> {
 
     private TouroDictionary dictionary;
 
@@ -30,15 +31,15 @@ public class DictionaryRequestHandler implements RequestHandler<APIGatewayProxyR
 
             Gson gson = new Gson();
             DictionaryRequest request = gson.fromJson(body, DictionaryRequest.class);
-            DictionaryResponse response = new DictionaryResponse(request.getWord(), dictionary.lookup(request.getWord()));
+            DictionaryResponse response = new DictionaryResponse(request.getWord(),
+                    dictionary.lookup(request.getWord()));
 
             String responseJson = gson.toJson(response);
             APIGatewayProxyResponseEvent apiResponse = new APIGatewayProxyResponseEvent();
             apiResponse.setStatusCode(200);
             apiResponse.setBody(responseJson);
             return apiResponse;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // this prints the stack trace to the AWS log file
             e.printStackTrace();
 
