@@ -5,8 +5,11 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.google.gson.Gson;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -18,6 +21,16 @@ public class DictionaryRequestHandler implements RequestHandler<APIGatewayProxyR
     public DictionaryRequestHandler() {
         dictionary = null;
         try {
+
+            S3Client s3Client = S3Client.create();
+
+            GetObjectRequest getObjectRequest = GetObjectRequest
+                    .builder()
+                    .bucket("bleier-dictionary")
+                    .key("dictionary.txt")
+                    .build();
+
+            InputStream in = s3Client.getObject(getObjectRequest);
             dictionary = new TouroDictionary();
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -25,6 +25,20 @@ public class TouroDictionary {
             }
     }
 
+    public TouroDictionary(InputStream in) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        String currentLine = br.readLine();
+        while (currentLine != null) {
+            if (currentLine.contains(" ")) {
+                dictionary.put(currentLine.substring(0, currentLine.indexOf(" ")),
+                        currentLine.substring(currentLine.indexOf(" ") + 1));
+            } else {
+                dictionary.put(currentLine, "");
+            }
+            currentLine = br.readLine();
+        }
+    }
+
     public String lookup(String word) {
         return dictionary.get(word.toUpperCase());
     }
